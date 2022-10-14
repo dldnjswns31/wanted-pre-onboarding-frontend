@@ -34,7 +34,7 @@ const StyledTitle = styled.h1`
   margin-top: 0;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #999999;
+  border-bottom: 1px solid ${({ theme }) => theme.palette.gray};
   font-weight: normal;
 `;
 
@@ -53,7 +53,7 @@ const StyledInput = styled.input`
   height: 3rem;
   margin: 0;
   padding: 0 0.5rem;
-  border: 1px solid #999999;
+  border: 1px solid ${({ theme }) => theme.palette.gray};
   border-radius: 0.4rem;
   box-sizing: border-box;
 `;
@@ -66,17 +66,17 @@ const StyledButtonContainer = styled.div`
 const StyledSubmitButton = styled.button`
   width: 100%;
   height: 3rem;
-  border: 1px solid #0b6bff;
+  border: 1px solid ${({ theme }) => theme.palette.blue};
   border-radius: 0.4rem;
-  background-color: #0b6bff;
-  color: #ffffff;
+  background-color: ${({ theme }) => theme.palette.blue};
+  color: ${({ theme }) => theme.palette.white};
   cursor: pointer;
   font-size: 1.5rem;
   transition: all 0.1s linear;
 
   &:hover {
-    background-color: #ffffff;
-    border: 1px solid #0b6bff;
-    color: #0b6bff;
+    background-color: ${({ theme }) => theme.palette.white};
+    border: 1px solid ${({ theme }) => theme.palette.blue};
+    color: ${({ theme }) => theme.palette.blue};
   }
 `;
