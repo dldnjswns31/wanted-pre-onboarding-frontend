@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import handleLoginSubmit from "../../apis/handLoginClick";
 
 function LoginSignupForm({ title }) {
   return (
@@ -16,7 +17,14 @@ function LoginSignupForm({ title }) {
           <div>유효성</div>
         </StyledInputContainer>
         <StyledButtonContainer>
-          <StyledSubmitButton type="submit">로그인</StyledSubmitButton>
+          <StyledSubmitButton
+            type="submit"
+            onClick={() => {
+              handleLoginSubmit();
+            }}
+          >
+            로그인
+          </StyledSubmitButton>
         </StyledButtonContainer>
       </form>
     </StyledContainer>
