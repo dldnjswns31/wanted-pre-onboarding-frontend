@@ -1,8 +1,11 @@
 import styled, { css } from "styled-components";
 import { useState } from "react";
 import theme from "../../styles/theme";
+import { useNavigate } from "react-router-dom";
 
-function LoginSignupForm({ title, handleButtonClick }) {
+function LoginSignupForm({ title, apiRequest }) {
+  const navigate = useNavigate();
+
   // email validation
   const [email, setEmail] = useState("");
   const [emailValid, setEmailValid] = useState(false);
@@ -13,6 +16,7 @@ function LoginSignupForm({ title, handleButtonClick }) {
   const [passwordValid, setPasswordValid] = useState(false);
   const [passwordValidMessage, setPasswordValidMessage] = useState("");
 
+  // handle input change
   const handleEmailChange = (e) => {
     const regEmail =
       /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
@@ -36,6 +40,19 @@ function LoginSignupForm({ title, handleButtonClick }) {
     }
   };
 
+  // handle submit
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    apiRequest(email, password).then((data) => {
+      if (data === "회원가입") {
+        alert("회원가입 완료되었습니다. 로그인 페이지로 이동합니다.");
+        navigate("/");
+      } else if (data === "로그인") {
+        alert("로그인 되었습니다.");
+        navigate("/todo");
+      }
+    });
+  };
   return (
     <StyledContainer>
       <form action="submit">
@@ -58,9 +75,7 @@ function LoginSignupForm({ title, handleButtonClick }) {
           <StyledSubmitButton
             type="submit"
             disabled={emailValid && passwordValid ? false : true}
-            onClick={(e) => {
-              handleButtonClick(e, email, password);
-            }}
+            onClick={handleButtonClick}
           >
             {title}
           </StyledSubmitButton>

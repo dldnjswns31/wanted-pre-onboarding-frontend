@@ -1,11 +1,8 @@
-import styled from "styled-components";
-import handleLoginClick from "../apis/handleLoginClick";
+import loginRequest from "../apis/loginRequest";
 import LoginSignupForm from "../components/common/LoginSignupForm";
 
 function Login() {
-  return (
-    <LoginSignupForm title={"로그인"} handleButtonClick={handleLoginClick} />
-  );
+  return <LoginSignupForm title={"로그인"} apiRequest={loginRequest} />;
 }
 
 export default Login;
