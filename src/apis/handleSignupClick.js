@@ -1,6 +1,6 @@
-const handleLoginClick = (e) => {
+const handleSignupClick = (e) => {
   e.preventDefault();
-  console.log("로그인!");
+  console.log("회원가입!");
 };
 
-export default handleLoginClick;
+export default handleSignupClick;

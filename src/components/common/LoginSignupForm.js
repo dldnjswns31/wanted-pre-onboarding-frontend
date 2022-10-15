@@ -1,26 +1,56 @@
-import styled from "styled-components";
-import handleLoginSubmit from "../../apis/handLoginClick";
+import styled, { css } from "styled-components";
+import { useState } from "react";
+import theme from "../../styles/theme";
 
-function LoginSignupForm({ title }) {
+function LoginSignupForm({ title, handleLoginClick }) {
+  const [email, setEmail] = useState("");
+  const [emailValid, setEmailValid] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordValid, setPasswordValid] = useState("");
+
+  const handleEmailChange = (e) => {
+    const regEmail =
+      /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+    if (regEmail.test(e.target.value)) {
+      setEmailValid("");
+      setEmail(e.target.value);
+    } else {
+      setEmailValid("올바른 이메일을 입력해주세요");
+    }
+  };
+  const handlePasswordChange = (e) => {
+    if (e.target.value.length >= 8) {
+      setPasswordValid("");
+      setPassword(e.target.value);
+    } else {
+      setPasswordValid("비밀번호는 8자 이상입니다.");
+    }
+  };
+
   return (
     <StyledContainer>
       <form action="submit">
         <StyledTitle>{title}</StyledTitle>
         <StyledInputContainer>
           <StyledLabel htmlFor="email">이메일</StyledLabel>
-          <StyledInput type="text" name="email" />
-          <div>유효성</div>
+          <StyledInput type="text" name="email" onChange={handleEmailChange} />
+          <StyledValid>{emailValid}</StyledValid>
         </StyledInputContainer>
         <StyledInputContainer>
           <StyledLabel htmlFor="password">비밀번호</StyledLabel>
-          <StyledInput type="password" name="password" />
-          <div>유효성</div>
+          <StyledInput
+            type="password"
+            name="password"
+            onChange={handlePasswordChange}
+          />
+          <StyledValid>{passwordValid}</StyledValid>
         </StyledInputContainer>
         <StyledButtonContainer>
           <StyledSubmitButton
             type="submit"
-            onClick={() => {
-              handleLoginSubmit();
+            disabled={emailValid && passwordValid ? false : true}
+            onClick={(e) => {
+              handleLoginClick(e, email, password);
             }}
           >
             로그인
@@ -67,6 +97,11 @@ const StyledInput = styled.input`
   box-sizing: border-box;
 `;
 
+const StyledValid = styled.div`
+  color: ${({ theme }) => theme.palette.red};
+  font-size: 0.8rem;
+`;
+
 const StyledButtonContainer = styled.div`
   width: 100%;
   margin-top: 2rem;
@@ -75,17 +110,26 @@ const StyledButtonContainer = styled.div`
 const StyledSubmitButton = styled.button`
   width: 100%;
   height: 3rem;
-  border: 1px solid ${({ theme }) => theme.palette.blue};
   border-radius: 0.4rem;
-  background-color: ${({ theme }) => theme.palette.blue};
-  color: ${({ theme }) => theme.palette.white};
-  cursor: pointer;
   font-size: 1.5rem;
   transition: all 0.1s linear;
 
-  &:hover {
-    background-color: ${({ theme }) => theme.palette.white};
-    border: 1px solid ${({ theme }) => theme.palette.blue};
-    color: ${({ theme }) => theme.palette.blue};
-  }
+  ${({ disabled, theme }) =>
+    disabled
+      ? css`
+          background-color: ${theme.palette.gray};
+          border: 1px solid ${theme.palette.gray};
+          color: ${theme.palette.white};
+        `
+      : css`
+          border: 1px solid ${({ theme }) => theme.palette.blue};
+          background-color: ${({ theme }) => theme.palette.blue};
+          color: ${({ theme }) => theme.palette.white};
+          cursor: pointer;
+          &:hover {
+            background-color: ${({ theme }) => theme.palette.white};
+            border: 1px solid ${({ theme }) => theme.palette.blue};
+            color: ${({ theme }) => theme.palette.blue};
+          }
+        `}
 `;
