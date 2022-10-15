@@ -2,28 +2,37 @@ import styled, { css } from "styled-components";
 import { useState } from "react";
 import theme from "../../styles/theme";
 
-function LoginSignupForm({ title, handleLoginClick }) {
+function LoginSignupForm({ title, handleButtonClick }) {
+  // email validation
   const [email, setEmail] = useState("");
-  const [emailValid, setEmailValid] = useState("");
+  const [emailValid, setEmailValid] = useState(false);
+  const [emailValidMessage, setEmailValidMessage] = useState("");
+
+  // password validation
   const [password, setPassword] = useState("");
-  const [passwordValid, setPasswordValid] = useState("");
+  const [passwordValid, setPasswordValid] = useState(false);
+  const [passwordValidMessage, setPasswordValidMessage] = useState("");
 
   const handleEmailChange = (e) => {
     const regEmail =
       /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
     if (regEmail.test(e.target.value)) {
-      setEmailValid("");
+      setEmailValid(true);
+      setEmailValidMessage("");
       setEmail(e.target.value);
     } else {
-      setEmailValid("올바른 이메일을 입력해주세요");
+      setEmailValid(false);
+      setEmailValidMessage("올바른 이메일을 입력해주세요");
     }
   };
   const handlePasswordChange = (e) => {
     if (e.target.value.length >= 8) {
-      setPasswordValid("");
+      setPasswordValid(true);
+      setPasswordValidMessage("");
       setPassword(e.target.value);
     } else {
-      setPasswordValid("비밀번호는 8자 이상입니다.");
+      setPasswordValid(false);
+      setPasswordValidMessage("비밀번호는 8자 이상입니다.");
     }
   };
 
@@ -34,7 +43,7 @@ function LoginSignupForm({ title, handleLoginClick }) {
         <StyledInputContainer>
           <StyledLabel htmlFor="email">이메일</StyledLabel>
           <StyledInput type="text" name="email" onChange={handleEmailChange} />
-          <StyledValid>{emailValid}</StyledValid>
+          <StyledValid>{emailValidMessage}</StyledValid>
         </StyledInputContainer>
         <StyledInputContainer>
           <StyledLabel htmlFor="password">비밀번호</StyledLabel>
@@ -43,17 +52,17 @@ function LoginSignupForm({ title, handleLoginClick }) {
             name="password"
             onChange={handlePasswordChange}
           />
-          <StyledValid>{passwordValid}</StyledValid>
+          <StyledValid>{passwordValidMessage}</StyledValid>
         </StyledInputContainer>
         <StyledButtonContainer>
           <StyledSubmitButton
             type="submit"
             disabled={emailValid && passwordValid ? false : true}
             onClick={(e) => {
-              handleLoginClick(e, email, password);
+              handleButtonClick(e, email, password);
             }}
           >
-            로그인
+            {title}
           </StyledSubmitButton>
         </StyledButtonContainer>
       </form>
