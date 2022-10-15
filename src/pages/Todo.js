@@ -10,7 +10,14 @@ function Todo() {
       navigate("/");
     }
   }, []);
-  return <div>todo</div>;
+  return (
+    <div>
+      <div></div>
+      <div>
+        <ul></ul>
+      </div>
+    </div>
+  );
 }
 
 export default Todo;

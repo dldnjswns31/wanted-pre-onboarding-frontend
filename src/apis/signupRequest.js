@@ -2,18 +2,10 @@ import apiRequest from "./instance";
 
 const signupRequest = (email, password) => {
   return apiRequest
-    .post(
-      "/auth/signup",
-      {
-        email,
-        password,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    .post("/auth/signup", {
+      email,
+      password,
+    })
     .then((res) => {
       return "회원가입";
     })

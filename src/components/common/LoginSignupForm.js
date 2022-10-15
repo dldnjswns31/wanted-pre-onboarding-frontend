@@ -88,8 +88,8 @@ export default LoginSignupForm;
 
 const StyledContainer = styled.div`
   position: relative;
-  min-width: 25rem;
-  min-height: 20rem;
+  width: 100%;
+  max-width: 25rem;
 `;
 
 const StyledTitle = styled.h1`

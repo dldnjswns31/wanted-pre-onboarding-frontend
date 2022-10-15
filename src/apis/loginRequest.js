@@ -2,20 +2,12 @@ import apiRequest from "./instance";
 
 const loginRequest = (email, password) => {
   return apiRequest
-    .post(
-      "/auth/signin",
-      {
-        email,
-        password,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    .post("/auth/signin", {
+      email,
+      password,
+    })
     .then((res) => {
-      localStorage.setItem("onboarding_user_token", res.data.access);
+      localStorage.setItem("onboarding_user_token", res.data.access_token);
       return "로그인";
     })
     .catch((err) => {
