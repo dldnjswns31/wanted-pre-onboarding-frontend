@@ -1,10 +1,18 @@
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Todo from "./pages/Todo";
 
 function App() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const userToken = localStorage.getItem("onboarding_user_token");
+    if (userToken) {
+      navigate("/todo");
+    }
+  }, []);
   return (
     <div>
       <StyledMainContainer>
