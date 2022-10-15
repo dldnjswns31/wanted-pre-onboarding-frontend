@@ -7,7 +7,7 @@ const loginRequest = (email, password) => {
       password,
     })
     .then((res) => {
-      localStorage.setItem("onboarding_user_token", res.data.access_token);
+      console.log(res);
       return "로그인";
     })
     .catch((err) => {

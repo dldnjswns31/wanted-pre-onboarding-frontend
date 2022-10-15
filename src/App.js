@@ -11,6 +11,8 @@ function App() {
     const userToken = localStorage.getItem("onboarding_user_token");
     if (userToken) {
       navigate("/todo");
+    } else {
+      navigate("/");
     }
   }, []);
   return (
