@@ -4,6 +4,7 @@ const theme = {
     gray: "#999999",
     white: "#ffffff",
     red: "#ff0000",
+    lightgray: "#efefef",
   },
 };
 
