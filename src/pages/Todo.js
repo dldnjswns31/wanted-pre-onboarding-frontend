@@ -47,10 +47,10 @@ function Todo() {
           <StyledTodosContainer>
             <StyledTodos>
               {todos &&
-                todos.map((data, idx) => {
+                todos.map((data) => {
                   return (
                     <TodoItem
-                      key={Date.now() + idx}
+                      key={data.id}
                       data={data}
                       todos={todos}
                       setTodos={setTodos}
