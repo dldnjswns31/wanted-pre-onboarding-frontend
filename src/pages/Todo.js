@@ -64,6 +64,7 @@ function Todo() {
               <StyledInput
                 type="text"
                 maxLength={20}
+                placeholder="Write Todo..."
                 value={inputValue}
                 onChange={handleInputChange}
               />
@@ -84,21 +85,20 @@ const StyledContainer = styled.div`
   display: flex;
   width: 30rem;
   height: 40rem;
-  /* background-color: ${({ theme }) => theme.palette.gray}; */
+  border-radius: 0.5rem;
   flex-direction: column;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.5);
 `;
 
 const StyledTitleContainer = styled.div`
   position: relative;
-  /* display: inline-block;
-  width: 100%; */
 `;
 
 const StyledTitle = styled.h3`
   display: inline-block;
   width: 100%;
   margin: 0 0 1rem 0;
-  flex: 1 0;
+  flex: 15 0;
   border-bottom: 1px solid ${({ theme }) => theme.palette.gray};
   font-size: 2rem;
   line-height: 200%;
@@ -107,14 +107,17 @@ const StyledTitle = styled.h3`
 
 const StyledLogout = styled.button`
   position: absolute;
+  height: 40%;
   top: 50%;
-  right: 0;
+  right: 1rem;
+  border: 1px solid ${({ theme }) => theme.palette.gray};
+  border-radius: 0.5rem;
   transform: translateY(-75%);
 `;
 
 const StyledTodosContainer = styled.div`
   padding: 0 0 0 1rem;
-  flex: 8 0;
+  flex: 80 0;
   overflow-y: scroll;
   /* ::-webkit-scrollbar {
     display: none;
@@ -135,27 +138,35 @@ const StyledTodos = styled.ul`
 
 const StyledInputContainer = styled.div`
   width: 100%;
-  flex: 1 0;
+  flex: 5 0;
 `;
 
 const StyledForm = styled.form`
   display: flex;
   width: 100%;
   height: 100%;
-  align-items: center;
+  align-items: flex-end;
 `;
 
 const StyledInput = styled.input`
-  height: 2rem;
+  height: 100%;
+  padding: 0 0.5rem;
   flex: 10 0;
   box-sizing: border-box;
+  border: none;
+  border-top: 1px solid ${({ theme }) => theme.palette.gray};
+  border-right: 1px solid ${({ theme }) => theme.palette.gray};
+  border-radius: 0 0 0 0.5rem;
   &:focus {
     outline: none;
   }
 `;
 
 const StyledCreateButton = styled.button`
-  height: 2rem;
+  height: 100%;
   flex: 1 0;
-  cursor: pointer;
+  border: none;
+  border-top: 1px solid ${({ theme }) => theme.palette.gray};
+  border-radius: 0 0 0.5rem 0;
+  box-sizing: border-box;
 `;
