@@ -39,7 +39,7 @@ function Todo() {
                 todos.map((data, idx) => {
                   return (
                     <TodoItem
-                      key={idx}
+                      key={Date.now() + idx}
                       data={data}
                       todos={todos}
                       setTodos={setTodos}

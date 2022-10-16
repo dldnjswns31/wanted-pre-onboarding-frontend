@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import deleteTodo from "../apis/deleteTodo";
+import getTodo from "../apis/getTodo";
 import updateTodo from "../apis/updateTodo";
 
 function TodoItem({ data, todos, setTodos }) {
   const [isModify, setIsModify] = useState(false);
-  // const [inputValue, setInputValue] = useState(data.todo);
   const [changedData, setChangedData] = useState({ ...data });
 
   const handleModifyClick = () => {
@@ -14,7 +14,9 @@ function TodoItem({ data, todos, setTodos }) {
 
   const handleDeleteClick = () => {
     const newTodos = todos.filter((todo) => {
-      if (todo.id !== data.id) return todo;
+      if (todo.id !== data.id) {
+        return true;
+      }
     });
     deleteTodo(data.id);
     setTodos([...newTodos]);
@@ -26,7 +28,9 @@ function TodoItem({ data, todos, setTodos }) {
 
   const handleModifyCompleteClick = () => {
     updateTodo(changedData)
-      .then(() => handleModifyClick())
+      .then(() => {
+        handleModifyClick();
+      })
       .catch((err) => console.log(err));
   };
 
