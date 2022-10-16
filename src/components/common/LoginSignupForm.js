@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginSignupForm({ title, apiRequest }) {
   const navigate = useNavigate();
@@ -80,6 +80,11 @@ function LoginSignupForm({ title, apiRequest }) {
           </StyledSubmitButton>
         </StyledButtonContainer>
       </form>
+      <StyledLinkContainer>
+        <Link to={title === "로그인" ? "/signup" : "/"}>
+          {title === "로그인" ? "회원가입" : "로그인"}하러 이동
+        </Link>
+      </StyledLinkContainer>
     </StyledContainer>
   );
 }
@@ -155,4 +160,16 @@ const StyledSubmitButton = styled.button`
             color: ${({ theme }) => theme.palette.blue};
           }
         `}
+`;
+
+const StyledLinkContainer = styled.div`
+  display: inline-block;
+  width: 100%;
+  margin-top: 1rem;
+  text-align: right;
+
+  a {
+    color: ${({ theme }) => theme.palette.blue};
+    text-decoration: none;
+  }
 `;
