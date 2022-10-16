@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import createTodo from "../apis/createTodo";
 import getTodo from "../apis/getTodo";
@@ -8,11 +9,18 @@ function Todo() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     getTodo().then((res) => {
       setTodos(res.data);
     });
   }, []);
+  const handleLogoutClick = () => {
+    alert("로그아웃 되었습니다.");
+    localStorage.removeItem("onboarding_user_token");
+    navigate("/");
+  };
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -32,7 +40,10 @@ function Todo() {
     <>
       {todos && (
         <StyledContainer>
-          <StyledTitle>To-Do List</StyledTitle>
+          <StyledTitleContainer>
+            <StyledTitle>To-Do List</StyledTitle>
+            <StyledLogout onClick={handleLogoutClick}>로그아웃</StyledLogout>
+          </StyledTitleContainer>
           <StyledTodosContainer>
             <StyledTodos>
               {todos &&
@@ -77,7 +88,14 @@ const StyledContainer = styled.div`
   flex-direction: column;
 `;
 
+const StyledTitleContainer = styled.div`
+  position: relative;
+  /* display: inline-block;
+  width: 100%; */
+`;
+
 const StyledTitle = styled.h3`
+  display: inline-block;
   width: 100%;
   margin: 0 0 1rem 0;
   flex: 1 0;
@@ -85,6 +103,13 @@ const StyledTitle = styled.h3`
   font-size: 2rem;
   line-height: 200%;
   text-align: center;
+`;
+
+const StyledLogout = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-75%);
 `;
 
 const StyledTodosContainer = styled.div`
