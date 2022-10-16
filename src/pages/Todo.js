@@ -71,7 +71,7 @@ export default Todo;
 
 const StyledContainer = styled.div`
   display: flex;
-  width: 25rem;
+  width: 30rem;
   height: 40rem;
   /* background-color: ${({ theme }) => theme.palette.gray}; */
   flex-direction: column;
@@ -88,6 +88,7 @@ const StyledTitle = styled.h3`
 `;
 
 const StyledTodosContainer = styled.div`
+  padding: 0 0 0 1rem;
   flex: 8 0;
   overflow-y: scroll;
   /* ::-webkit-scrollbar {

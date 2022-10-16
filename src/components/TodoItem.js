@@ -8,23 +8,7 @@ function TodoItem({ data, todos, setTodos }) {
   // const [inputValue, setInputValue] = useState(data.todo);
   const [changedData, setChangedData] = useState({ ...data });
 
-  const handleInputCheck = (e) => {
-    setChangedData({ ...changedData, isCompleted: !changedData.isCompleted });
-  };
-
   const handleModifyClick = () => {
-    setIsModify(!isModify);
-  };
-
-  const handleModifyCompleteClick = () => {
-    console.log(changedData);
-    updateTodo(changedData)
-      .then((res) => handleModifyClick())
-      .catch((err) => console.log(err));
-  };
-
-  const handleModifyCancelClick = () => {
-    setChangedData({ ...data });
     setIsModify(!isModify);
   };
 
@@ -34,6 +18,21 @@ function TodoItem({ data, todos, setTodos }) {
     });
     deleteTodo(data.id);
     setTodos([...newTodos]);
+  };
+
+  const handleInputCheck = (e) => {
+    setChangedData({ ...changedData, isCompleted: !changedData.isCompleted });
+  };
+
+  const handleModifyCompleteClick = () => {
+    updateTodo(changedData)
+      .then(() => handleModifyClick())
+      .catch((err) => console.log(err));
+  };
+
+  const handleModifyCancelClick = () => {
+    setChangedData({ ...data });
+    setIsModify(!isModify);
   };
 
   const handleInputChange = (e) => {
@@ -55,7 +54,9 @@ function TodoItem({ data, todos, setTodos }) {
           onChange={handleInputChange}
         ></StyledInput>
       ) : (
-        <StyledSpan completed={changedData.isCompleted}>{data.todo}</StyledSpan>
+        <StyledSpan completed={changedData.isCompleted}>
+          {changedData.todo}
+        </StyledSpan>
       )}
 
       <StyledButtonContainer>
