@@ -8,7 +8,11 @@
 
 ```
 git clone https://github.com/dldnjswns31/wanted-pre-onboarding-frontend.git
+
+cd wanted-pre-onboarding-frontend
+
 npm install
+
 npm start
 
 이후
