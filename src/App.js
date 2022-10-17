@@ -10,9 +10,9 @@ function App() {
   useEffect(() => {
     const userToken = localStorage.getItem("onboarding_user_token");
     if (userToken) {
-      navigate("/todo");
+      navigate("/todo", { replace: true });
     } else {
-      navigate("/");
+      navigate("/", { replace: true });
     }
   }, []);
   return (
