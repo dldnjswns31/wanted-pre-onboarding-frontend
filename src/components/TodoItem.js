@@ -22,8 +22,10 @@ function TodoItem({ data, todos, setTodos }) {
     setTodos([...newTodos]);
   };
 
-  const handleInputCheck = (e) => {
-    setChangedData({ ...changedData, isCompleted: !changedData.isCompleted });
+  const handleInputCheck = () => {
+    const data = { ...changedData, isCompleted: !changedData.isCompleted };
+    setChangedData(data);
+    updateTodo(data);
   };
 
   const handleModifyCompleteClick = () => {
@@ -45,13 +47,11 @@ function TodoItem({ data, todos, setTodos }) {
 
   return (
     <StyledList>
-      {isModify && (
-        <StyledCheckbox
-          type="checkbox"
-          checked={changedData.isCompleted}
-          onChange={handleInputCheck}
-        ></StyledCheckbox>
-      )}
+      <StyledCheckbox
+        type="checkbox"
+        checked={changedData.isCompleted}
+        onChange={handleInputCheck}
+      ></StyledCheckbox>
       {isModify ? (
         <StyledInput
           value={changedData.todo}
@@ -88,10 +88,11 @@ const StyledList = styled.li`
 `;
 
 const StyledCheckbox = styled.input`
-  margin: 0 2em 0 0;
+  margin: 0 2rem 0 0;
 `;
 
 const StyledSpan = styled.span`
+  height: 1.3rem;
   font-size: 1.3rem;
   ${({ completed }) =>
     completed &&
@@ -101,7 +102,13 @@ const StyledSpan = styled.span`
     `}
 `;
 
-const StyledInput = styled.input``;
+const StyledInput = styled.input`
+  width: 70%;
+  padding: 0;
+  border: none;
+  box-shadow: 0 1px 0 0 ${({ theme }) => theme.palette.gray};
+  font-size: 1.3rem;
+`;
 
 const StyledButtonContainer = styled.div`
   position: absolute;
