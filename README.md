@@ -56,7 +56,7 @@ https://wanted-pre-onboarding-frontend-hazel.vercel.app/
 <img src="https://user-images.githubusercontent.com/71388830/196077962-28820078-55f4-4aa1-b666-ef55eca82f9b.gif" alt="회원가입"/>
 <br/>
 <br/>
-<li>로그인 성공 시 JWT token을 local storage에 저장</li>
+<li>로그인 성공 시 JWT를 local storage에 저장</li>
 <br/>
 <img src="https://user-images.githubusercontent.com/71388830/196077020-71bae5cd-7a54-404f-8e9f-c22f0b203cd4.gif" alt="로그인"/>
 </p>
